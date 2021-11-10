@@ -4,15 +4,16 @@ import (
 	"net/http"
 
 	"github.com/julienschmidt/httprouter"
+	"github.com/ollolollollooloo/practice-golang/controllers"
 	"gopkg.in/mgo.v2"
 )
 
 func main() {
 	r := httprouter.New()
-	uc := contollers.NewUserController(getSession())
+	uc := controllers.NewUserController(getSession())
 	r.GET("/user/:id", uc.GetUser)
 	r.POST("/user", uc.CreateUser)
-	r.DELETE("/user/:id", uc.Delete)
+	r.DELETE("/user/:id", uc.DeleteUser)
 	http.ListenAndServe("localhost:9000", r)
 }
 
